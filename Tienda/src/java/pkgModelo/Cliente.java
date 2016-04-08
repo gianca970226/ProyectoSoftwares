@@ -5,7 +5,7 @@
  */
 package pkgModelo;
 
-import com.google.gson.Gson;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
