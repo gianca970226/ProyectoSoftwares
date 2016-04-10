@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
-    crearGridClientes();
+   crearGridClientes();
 });
 function crearGridClientes() {
 
     jqGridClientes = jQuery('#gridClientes').jqGrid({
-        url: 'ClientesControlador',
+        url: '../ClientesControlador',
         datatype: "json",
         mtype: 'POST',
         postData: {

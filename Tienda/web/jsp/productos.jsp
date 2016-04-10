@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <script src="js/Productos.js"></script>
+         <script src="../js/Productos.js"></script>
         <title>JSP Page</title>
     </head>
     <body>

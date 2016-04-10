@@ -5,8 +5,8 @@
  */
 $(document).on('ready', function () {
     $("#btnVerClientes").on('click', function (event) {
-        
-        $("#grid").load("jsp/clientes.jsp", function () {
+      
+        $("#grid").load("../jsp/clientes.jsp", function () {
             
             if (status === "error") {
                 alert("Lo siento, no se pudo dar acceso");
@@ -15,7 +15,7 @@ $(document).on('ready', function () {
     });
     $("#btnVerProductos").on('click', function (event) {
         
-        $("#grid").load("jsp/productos.jsp", function () {
+        $("#grid").load("../jsp/productos.jsp", function () {
             
             if (status === "error") {
                 alert("Lo siento, no se pudo dar acceso");

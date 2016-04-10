@@ -110,6 +110,8 @@ public class Cliente extends Conexion
     {
         Producto p = new Producto(2, "asd", "sqda", 2, 2, "adsd");
         p.insertar();
+        int a;
+        
     }
     
 

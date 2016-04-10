@@ -11,7 +11,7 @@ $(document).ready(function () {
 function crearGridProductos() {
 
     jqGridClientes = jQuery('#gridProductos').jqGrid({
-        url: 'ProductosControlador',
+        url: '../ProductosControlador',
         datatype: "json",
         mtype: 'POST',
         postData: {

@@ -32,7 +32,7 @@ public class ClientesControlador extends HttpServlet
 
     String operacion;
     Cliente clientes;
-
+    
     public ClientesControlador()
     {
         this.operacion = "";

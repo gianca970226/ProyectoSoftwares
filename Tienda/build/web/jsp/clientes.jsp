@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="js/Clientes.js"></script>
+        <script src="../js/Clientes.js"></script>
 
     </head>
     <body>

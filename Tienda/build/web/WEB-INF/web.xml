@@ -4,9 +4,17 @@
         <servlet-name>ProductosControlador</servlet-name>
         <servlet-class>pkgControlador.ProductosControlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsuariosControlador</servlet-name>
+        <servlet-class>pkgControlador.UsuariosControlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductosControlador</servlet-name>
         <url-pattern>/ProductosControlador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuariosControlador</servlet-name>
+        <url-pattern>/UsuariosControlador</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
