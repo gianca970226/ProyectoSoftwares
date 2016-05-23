@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  * @author Ambrosio
  */
 public class Conexion {
+
     protected Connection connection;
     protected ResultSet rs;
     protected Statement s;
@@ -29,7 +30,7 @@ public class Conexion {
         this.connection = null;
         this.rs = null;
         this.s = null;
-        this.ps=null;
+        this.ps = null;
     }
 
     public void conectar() {
@@ -44,11 +45,14 @@ public class Conexion {
             Class.forName("org.postgresql.Driver");
 
             this.connection = DriverManager.getConnection(url, user, password);
-            if(this.connection != null){
+
+            if (this.connection != null) {
                 System.out.println("Conectado a la base de datos...");
             }
         } catch (Exception e) {
             System.out.println("Problemas de conexion");
         }
     }
+
+    
 }

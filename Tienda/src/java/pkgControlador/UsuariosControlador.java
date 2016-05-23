@@ -6,12 +6,14 @@
 package pkgControlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pkgModelo.Cliente;
 import pkgModelo.Usuario;
 
 /**
@@ -34,14 +36,13 @@ public class UsuariosControlador extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, SQLException
     {
         response.setContentType("text/html;charset=UTF-8");
         this.operacion = request.getParameter("oper");
         this.usuario = new Usuario(request.getParameter("user"), request.getParameter("pass"));
         switch (this.operacion) {
             case "val":
-                System.out.println("oe");
                 response.getWriter().print(this.usuario.IniciarSesion());
                 break;
         }
@@ -60,7 +61,11 @@ public class UsuariosControlador extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +80,11 @@ public class UsuariosControlador extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuariosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

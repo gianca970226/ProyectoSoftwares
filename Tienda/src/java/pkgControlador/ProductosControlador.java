@@ -6,20 +6,21 @@
 package pkgControlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import pkgModelo.Cliente;
+import pkgModelo.Ingresos;
 import pkgModelo.Producto;
 
 /**
  *
  * @author gian
  */
-public class ProductosControlador extends HttpServlet
-{
+public class ProductosControlador extends HttpServlet {
 
     String operacion;
     Producto producto;
@@ -34,11 +35,12 @@ public class ProductosControlador extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         this.operacion = "";
+
         this.producto = new Producto();
+
         this.operacion = request.getParameter("oper");
         switch (this.operacion) {
             case "1":
@@ -46,9 +48,24 @@ public class ProductosControlador extends HttpServlet
                 break;
             case "add":
                 this.producto = new Producto(Integer.parseInt(request.getParameter("id_producto")), request.getParameter("nombre"),
-                        request.getParameter("descripcion"), Integer.parseInt(request.getParameter("cantidad")),
+                        request.getParameter("descripcion"), 0,
                         Double.parseDouble(request.getParameter("valor")), request.getParameter("distribuidor"));
                 this.producto.insertar();
+                break;
+            case "edit":
+                System.out.println("oahshadiasdhiasdh");
+                this.producto = new Producto(Integer.parseInt(request.getParameter("id_producto")),
+                        request.getParameter("nombre"), request.getParameter("descripcion"),
+                        Double.parseDouble(request.getParameter("valor")),
+                        request.getParameter("distribuidor"));
+
+                this.producto.update(Integer.parseInt(request.getParameter("id")));
+
+                break;
+
+            case "ingresos":
+                Ingresos ingreso = new Ingresos(Integer.parseInt(request.getParameter("id")),  Double.parseDouble(request.getParameter("precio")), Integer.parseInt(request.getParameter("cantidad")));
+                ingreso.insertar();
                 break;
 
         }
@@ -65,9 +82,12 @@ public class ProductosControlador extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,9 +100,12 @@ public class ProductosControlador extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -91,8 +114,7 @@ public class ProductosControlador extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -14,12 +14,19 @@
     <body>
         <table id="gridClientes"></table>
         <div id="pGridClientes"></div>
+        
+        
         <div id="dialog-elimiar" hidden="false" title="Confirmar?">
             <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Esta seguro eliminar el cliente?</p>
         </div>
+        
+        
+        
         <div id="dialog-selecion" hidden="false" title="Aviso">
   <p>Selecione fila</p>
 </div>
+        
+        
         
             
         </div>

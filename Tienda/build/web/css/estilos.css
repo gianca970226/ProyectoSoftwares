@@ -11,7 +11,7 @@ header
 footer {
     width: 100%;
     height: 100px;
-     background-color:#333; 
+    background-color:#333; 
     opacity: 0.4;
     color: #ffffff;
     border-radius: 5px;
@@ -19,20 +19,51 @@ footer {
     opacity: 0.4;
 
 }
-
+#Enviar2
+{
+    border-color: #4DBD88;
+    background-color: #4DBD88;
+    height: 44px;
+    width: 100%;
+    transition: background-color 0.25s linear;
+    color: white;
+    
+}
+#Enviar2:hover
+{
+    background-color: #5de3a0;
+}
+h3
+{
+    border: 0;
+    margin: 0;
+}
+#sub
+{
+    background-color: #464D57;
+    height: 90px;
+    margin-top: 0;
+    margin: 0;
+    color: #ffffff;
+    width: 100%;
+    padding-top: 2px;
+    margin-bottom: 0px;
+    border: 0;
+    border-radius: 5px;
+}
 #cuadro
 {
-    background-color:#333; 
-    opacity: 0.4;
+    background-color:#ffffff; 
+    margin-top: 80px;
     border-radius: 20px;
     text-align: center;
     margin-bottom: 0;
-    color: white;
-  
+    color: black;
+    
 }
 #aviso
 {
-    color: red;
+    color: #8A959E;
     text-align: left;
     font-family: fantasy;
     font-size: 22px;

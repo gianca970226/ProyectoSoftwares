@@ -5,10 +5,8 @@
  */
 package pkgControlador;
 
-
-
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pkgModelo.Abono;
 import pkgModelo.Cliente;
+
 
 /**
  *
@@ -27,14 +27,12 @@ import pkgModelo.Cliente;
         = {
             "/ClientesControlador"
         })
-public class ClientesControlador extends HttpServlet
-{
+public class ClientesControlador extends HttpServlet {
 
     String operacion;
     Cliente clientes;
-    
-    public ClientesControlador()
-    {
+
+    public ClientesControlador() {
         this.operacion = "";
         this.clientes = new Cliente();
     }
@@ -49,33 +47,45 @@ public class ClientesControlador extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         this.operacion = request.getParameter("oper");
-        this.clientes= new Cliente();
+
         switch (this.operacion) {
             case "1":
                 response.getWriter().print(this.clientes.select());
                 break;
-            case "del": {
-                try {
-                    this.clientes.delete(Integer.parseInt(request.getParameter("cedula")));
-                    System.out.println("elimino");
-                 //   response.getWriter().printf("{\"ok\":\"bien\",\"mensaje\"}");
-                } catch (SQLException ex) {
-                    Logger.getLogger(ClientesControlador.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+            case "del": 
+                this.clientes.delete(Integer.parseInt(request.getParameter("cedula")));
                 break;
-            }
-            case "edit":
+            
+            case "edit": 
+                this.clientes.setCedula(Integer.parseInt(request.getParameter("cedula")));
+                this.clientes.setNombre(request.getParameter("nombre"));
+                this.clientes.setApellido(request.getParameter("apellido"));
+                this.clientes.setCelular(Long.parseLong((request.getParameter("celular"))));
+                this.clientes.setDireccion(request.getParameter("direccion"));
+                this.clientes.update(Integer.parseInt(request.getParameter("id")));
+                break;
+           
+            case "add":
+                this.clientes = new Cliente(Integer.parseInt(request.getParameter("cedula")), request.getParameter("nombre"),
+                        request.getParameter("apellido"), Long.parseLong(request.getParameter("celular")),
+                        request.getParameter("direccion"), 0);
+                this.clientes.insertar();
+                break;
+            case "validar":
 
-               this.clientes.setNombre( request.getParameter("nombre"));
-               this.clientes.setApellido(request.getParameter("apellido"));
-               this.clientes.setCelular(Integer.parseInt(request.getParameter("celular")));
-               this.clientes.setDireccion(request.getParameter("direccion"));
-               this.clientes.update(Integer.parseInt(request.getParameter("id")));
+                response.getWriter().print(this.clientes.validarCedula(Integer.parseInt(request.getParameter("cedula"))));
+                break;
+            case "buscarCliente":
+
+                response.getWriter().print(this.clientes.buscarCliente(Integer.parseInt(request.getParameter("cedula"))));
+                break;
+            case "abonos":
+                Abono ingreso = new Abono(Integer.parseInt(request.getParameter("id_cliente")), Double.parseDouble(request.getParameter("valor")));
+                ingreso.insertar();
+                break;
 
         }
 
@@ -92,9 +102,12 @@ public class ClientesControlador extends HttpServlet
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -107,9 +120,12 @@ public class ClientesControlador extends HttpServlet
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientesControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -118,8 +134,7 @@ public class ClientesControlador extends HttpServlet
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo()
-    {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
